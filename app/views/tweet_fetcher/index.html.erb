@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="page-header">
+    <h1> <%= link_to @tweet_fetcher.self_tweets.last.user.screen_name, "http://www.twitter.com/#{@tweet_fetcher.self_tweets.last.user.screen_name}" %> </h1>
+  </div>
+
+  <div class="pull-left">
+    <%= form_tag '/tweet_fetcher' do %>
+    <%= label_tag 'Create a Tweet'%>
+    <%= text_field_tag :tweet_body %>
+    <%= submit_tag "Post a Tweet", class: "btn btn-info" %>
+    <% end %>
+  </div>
+
+  <!-- MY TWITTER FEED - HOME -->
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>My Twitter Feed</th>
+        <th>Posted By:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweet_fetcher.self_feed.each do |tweet| %>
+      <tr>
+        <td><%= tweet.text %></td>
+        <td>@<%= link_to tweet.user.screen_name, "http://www.twitter.com/#{tweet.user.screen_name}" %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tweets Talking About <%= link_to @tweet_fetcher.self_tweets.last.user.screen_name, "http://www.twitter.com/#{@tweet_fetcher.self_tweets.last.user.screen_name}" %> </th>
+        <th>Posted By:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweet_fetcher.self_talk.each do |tweet| %>
+      <tr>
+        <td><%= tweet.text %></td>
+        <td>@<%= link_to tweet.user.screen_name, "http://www.twitter.com/#{tweet.user.screen_name}" %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <!-- end of home section -->
+
+
+<!-- tweets by me -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>My Tweets</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweet_fetcher.self_tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.text %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>My Friends</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweet_fetcher.friends.each do |user| %>
+      <tr>
+        <td><%= link_to user.screen_name, "http://www.twitter.com/#{user.screen_name}" %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="pull-left">
+    <%= form_tag '/tweet_fetcher' %>
+    <%= label_tag 'Twitter Handle'%>
+    <%= text_field_tag :twitter_handle %>
+    <%= submit_tag "Look up a User's Tweets", class: "btn btn-info" %>
+  </div>
+
+<% if @tweets %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Tweets by <%= link_to @tweets.first.user.screen_name, "http://www.twitter.com/#{@tweets.first.user.screen_name}" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweets.each.each do |tweet| %>
+      <tr>
+        <td><%= tweet.text %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+</div>
+
+
+<p>FIND SOME FOLLOWERS</p>
+<div class="pull-left">
+  <%= form_tag '/tweet_fetcher' %>
+  <%= text_field_tag :user_followers %>
+  <%= submit_tag "Look up a User's Followers", class: "btn btn-info" %>
+</div>
+
+<% if @tt %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Followers of <%= link_to @tt.first.user.screen_name, "http://www.twitter.com/#{@tt.first.user.screen_name}" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tweets.followers.each do |follower| %>
+    <tr>
+      <td><%= follower.screen_name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>
+</div>
+
+<div class="pull-left">
+  <%= form_tag '/tweet_fetcher' %>
+  <%= label_tag 'Follow a Twitter User'%>
+  <%= text_field_tag :twitter_user %>
+  <%= submit_tag "Follow this user", class: "btn btn-info" %>
+</div>

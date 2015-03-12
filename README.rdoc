@@ -1,0 +1,18 @@
+## Twitter API
+
+#### Stories
+[√] Build an app that interacts with twitter
+[√] [Twitter Gem]("https://github.com/sferik/twitter")
+[√] [Twitter App Registration]("https://apps.twitter.com/") (Make sure to set access level or else you can't post.)
+[√] Make sure to hide your access keys in a .env file.
+[√] Make sure to add a way to hide authentication keys from github.
+[√] [dotenv]("https://github.com/bkeepers/dotenv")
+[√] [secrets.yml]("http://guides.rubyonrails.org/4_1_release_notes.html#config-secrets-yml")
+[√] Use bootstrap to style it.
+[√] A textfield to look up a user's tweets.
+[√} A text field and form to create a tweet. (From your account)
+[√] Homepage is list of tweets from people the authenticated user follows or tweets of the user looked up.
+- Follow a user through a text field.
+- Fetch a list of a users followers through a text box.
+[√] Button that fetches tweets that mention your username.
+- Fetch the three most recent tweets to Obama that say "Thanks Obama".
